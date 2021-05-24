@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style type="text/css">
+      .row{
+         margin:0px auto;
+         width:700px
+      }
+      h3{
+         text-align:center
+      }
+    </style>
+</head>
+<!--
+  now = datetime.datetime.now()
+
+print(now)          # 2015-04-19 12:11:32.669083
+nowDate = now.strftime('%Y-%m-%d')
+-->
+<body>
+   <div class="container">
+     <div class="row">
+       <h3>공지사항</h3>
+       <table class="table">
+         <tr>
+           <th class="text-center">번호</th>
+           <th class="text-center">제목</th>
+           <th class="text-center">이름</th>
+           <th class="text-center">작성일</th>
+           <th class="text-center">비고</th>
+         </tr>
+         {% for vo in object_list %}
+           <tr>
+             <td class="text-center">{{forloop.counter}}</td>
+               <td><a href="{% url 'detail' pk=vo.id %}">{{vo.subject}}</a></td>
+             <td class="text-center">{{vo.name}}</td>
+             <td class="text-center">{{vo.regdate|date:"Y-m-d"}}</td>
+             <td class="text-center">
+               <a href="{% url 'update' pk=vo.id %}" class="btn btn-sm btn-info">수정</a>
+               <a href="#" class="btn btn-sm btn-danger">삭제</a>
+             </td>
+           </tr>
+         {% endfor %}
+       </table>
+     </div>
+   </div>
+</body>
+</html>
